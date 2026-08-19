@@ -19,6 +19,8 @@ export type SwarmOptions = {
   interactive?: boolean;
   light?: boolean;
   mix?: [number, number, number];
+  /** raises the device-pixel cap for a small, focal canvas (the microscope lens) */
+  sharp?: boolean;
 };
 
 const BIOLUM = "61, 232, 192";
@@ -41,12 +43,12 @@ function glowSprite(rgb: string, radius: number): HTMLCanvasElement {
 }
 
 export function startSwarm(canvas: HTMLCanvasElement, options: SwarmOptions = {}) {
-  const { density = 1, interactive = true, light = true, mix = [0.4, 0.34, 0.26] } = options;
+  const { density = 1, interactive = true, light = true, mix = [0.4, 0.34, 0.26], sharp = false } = options;
   const ctx = canvas.getContext("2d", { alpha: true });
   if (!ctx) return () => {};
 
   const coarse = window.matchMedia("(pointer: coarse)").matches;
-  const dpr = Math.min(window.devicePixelRatio || 1, coarse ? 1.5 : 2);
+  const dpr = Math.min(window.devicePixelRatio || 1, sharp ? 3 : coarse ? 1.5 : 2);
   const glow = [glowSprite(BIOLUM, 40), glowSprite(PLASMA, 40)];
   const lightSprite = glowSprite(BIOLUM, 180);
 
@@ -80,11 +82,29 @@ export function startSwarm(canvas: HTMLCanvasElement, options: SwarmOptions = {}
     const newWidth = Math.max(rect.width, 1);
     const newHeight = Math.max(rect.height, 1);
 
-    // Mobile browsers fire resize when the address bar hides/shows on scroll.
-    // Skip no-op calls, and reposition (never respawn) on real ones, so the
-    // culture drifts instead of teleporting to brand-new random specimens.
-    if (organisms.length > 0 && Math.abs(newWidth - width) < 1 && Math.abs(newHeight - height) < 1) {
-      return;
+    // Mobile browsers fire resize whenever the address bar hides or shows while
+    // scrolling. Reacting to that repaints the whole culture and reads as the
+    // organisms teleporting. Only a width change is a real resize; a height
+    // that merely shrank is the address bar, so leave everything alone.
+    if (organisms.length > 0) {
+      const widthChanged = Math.abs(newWidth - width) >= 1;
+      const heightChanged = Math.abs(newHeight - height) >= 1;
+      if (!widthChanged && !heightChanged) return;
+
+      if (!widthChanged) {
+        // Height-only change: the address bar, not a real resize. Match the
+        // drawing surface so nothing squishes, but keep every organism exactly
+        // where it was. Rescaling or respawning here is what made them
+        // teleport mid-scroll.
+        height = newHeight;
+        canvas.width = Math.round(width * dpr);
+        canvas.height = Math.round(height * dpr);
+        ctx!.setTransform(dpr, 0, 0, dpr, 0, 0);
+        for (const o of organisms) {
+          if (o.y > height + 60) o.y = height + 60;
+        }
+        return;
+      }
     }
 
     const prevWidth = width || newWidth;
@@ -127,13 +147,31 @@ export function startSwarm(canvas: HTMLCanvasElement, options: SwarmOptions = {}
     ctx!.closePath();
   }
 
+  function drawFlagellum(dir: 1 | -1, half: number, len: number, t: number, phase: number, rgb: string) {
+    const segments = 6;
+    ctx!.beginPath();
+    ctx!.moveTo(dir * half, 0);
+    for (let i = 1; i <= segments; i++) {
+      const p = i / segments;
+      const x = dir * (half + len * p);
+      const wobble = Math.sin(t * 0.16 + phase + p * 5.5) * (2 * p);
+      ctx!.lineTo(x, wobble);
+    }
+    ctx!.strokeStyle = `rgba(${rgb}, 0.38)`;
+    ctx!.lineWidth = 0.8;
+    ctx!.stroke();
+  }
+
   function drawRod(o: Organism, t: number) {
     const rgb = o.hue ? PLASMA : BIOLUM;
     const radius = o.size * 0.62;
     const length = o.size * 3.1;
+    const tip = length / 2;
     ctx!.save();
     ctx!.translate(o.x, o.y);
     ctx!.rotate(o.angle + Math.sin(t * 0.02 + o.phase) * 0.08);
+    drawFlagellum(-1, tip, o.size * 1.8, t, o.phase, rgb);
+    drawFlagellum(1, tip, o.size * 1.8, t, o.phase + Math.PI, rgb);
     capsulePath(length, radius);
     ctx!.fillStyle = `rgba(${rgb}, 0.1)`;
     ctx!.fill();

@@ -14,13 +14,13 @@ export default function About() {
     <section id="sobre" className="border-y border-biolum/10 bg-abyss-2/50 py-24 sm:py-32">
       <div className="mx-auto grid max-w-[1400px] items-start gap-12 px-5 lg:grid-cols-12 lg:gap-16">
         <Reveal from="left" className="min-w-0 lg:col-span-5">
-          <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[14px] border border-biolum/18">
+          <div className="relative aspect-square w-full overflow-hidden rounded-[14px] border border-biolum/18 sm:aspect-[4/5]">
             <Image
               src="/photos/matheus-profile.jpg"
               alt={t.about.photoAlt}
               fill
               sizes="(min-width: 1024px) 40vw, 90vw"
-              className="object-cover"
+              className="object-cover object-[50%_28%]"
               priority={false}
             />
             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(5,8,10,0.55),transparent_60%)]" />

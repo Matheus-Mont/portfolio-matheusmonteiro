@@ -120,13 +120,16 @@ export default function Hero() {
             role="img"
           >
             <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle_at_50%_45%,rgba(61,232,192,0.12),rgba(5,8,10,0.45)_72%)]" />
+            {/* Inside the lens the culture is rendered at a higher pixel ratio
+                and never blurred: looking through the microscope is the sharp view. */}
             <MicrobeSwarm
               density={2.6}
               interactive={false}
               light={false}
+              sharp
               className="absolute inset-0 h-full w-full rounded-full"
             />
-            <div className="absolute inset-0 rounded-full border border-biolum/25 bg-biolum/[0.03] backdrop-blur-[1px] backdrop-saturate-150" />
+            <div className="absolute inset-0 rounded-full border border-biolum/25 bg-biolum/[0.03] backdrop-saturate-150" />
             <div className="absolute inset-[9%] rounded-full border border-biolum/15" />
             <div className="absolute inset-[26%] rounded-full border border-plasma/20" />
             <div
