@@ -147,6 +147,19 @@ export function startSwarm(canvas: HTMLCanvasElement, options: SwarmOptions = {}
     ctx!.closePath();
   }
 
+  // The nucleus of each organism is a scrap of source code. Drawn upright
+  // regardless of how the body is rotated, otherwise the glyphs read upside down.
+  function drawNucleus(glyph: string, size: number, bodyAngle: number, rgb: string, alpha: number) {
+    ctx!.save();
+    ctx!.rotate(-bodyAngle);
+    ctx!.font = `600 ${size.toFixed(2)}px ui-monospace, SFMono-Regular, Menlo, monospace`;
+    ctx!.textAlign = "center";
+    ctx!.textBaseline = "middle";
+    ctx!.fillStyle = `rgba(${rgb}, ${alpha})`;
+    ctx!.fillText(glyph, 0, 0);
+    ctx!.restore();
+  }
+
   function drawFlagellum(dir: 1 | -1, half: number, len: number, t: number, phase: number, rgb: string) {
     const segments = 6;
     ctx!.beginPath();
@@ -167,9 +180,10 @@ export function startSwarm(canvas: HTMLCanvasElement, options: SwarmOptions = {}
     const radius = o.size * 0.62;
     const length = o.size * 3.1;
     const tip = length / 2;
+    const bodyAngle = o.angle + Math.sin(t * 0.02 + o.phase) * 0.08;
     ctx!.save();
     ctx!.translate(o.x, o.y);
-    ctx!.rotate(o.angle + Math.sin(t * 0.02 + o.phase) * 0.08);
+    ctx!.rotate(bodyAngle);
     drawFlagellum(-1, tip, o.size * 1.8, t, o.phase, rgb);
     drawFlagellum(1, tip, o.size * 1.8, t, o.phase + Math.PI, rgb);
     capsulePath(length, radius);
@@ -178,11 +192,7 @@ export function startSwarm(canvas: HTMLCanvasElement, options: SwarmOptions = {}
     ctx!.strokeStyle = `rgba(${rgb}, 0.5)`;
     ctx!.lineWidth = 1;
     ctx!.stroke();
-    ctx!.beginPath();
-    ctx!.moveTo(0, -radius + 0.5);
-    ctx!.lineTo(0, radius - 0.5);
-    ctx!.strokeStyle = `rgba(${rgb}, 0.28)`;
-    ctx!.stroke();
+    drawNucleus("</>", o.size * 1.1, bodyAngle, rgb, 0.6);
     ctx!.restore();
   }
 
@@ -190,9 +200,10 @@ export function startSwarm(canvas: HTMLCanvasElement, options: SwarmOptions = {}
     const rgb = o.hue ? PLASMA : BIOLUM;
     const rx = o.size * 1.25;
     const ry = o.size * 0.78;
+    const bodyAngle = Math.atan2(o.vy, o.vx);
     ctx!.save();
     ctx!.translate(o.x, o.y);
-    ctx!.rotate(Math.atan2(o.vy, o.vx));
+    ctx!.rotate(bodyAngle);
 
     ctx!.beginPath();
     ctx!.ellipse(0, 0, rx, ry, 0, 0, Math.PI * 2);
@@ -202,10 +213,7 @@ export function startSwarm(canvas: HTMLCanvasElement, options: SwarmOptions = {}
     ctx!.lineWidth = 1;
     ctx!.stroke();
 
-    ctx!.beginPath();
-    ctx!.ellipse(rx * 0.1, 0, rx * 0.24, ry * 0.34, 0, 0, Math.PI * 2);
-    ctx!.strokeStyle = `rgba(${rgb}, 0.3)`;
-    ctx!.stroke();
+    drawNucleus("@", o.size * 1.15, bodyAngle, rgb, 0.62);
 
     const count = 20;
     ctx!.beginPath();
@@ -259,6 +267,8 @@ export function startSwarm(canvas: HTMLCanvasElement, options: SwarmOptions = {}
     ctx!.strokeStyle = `rgba(${rgb}, 0.55)`;
     ctx!.lineWidth = 1;
     ctx!.stroke();
+
+    drawNucleus("{}", o.size * 1.05, o.angle, rgb, 0.6);
 
     const spikes = 9;
     ctx!.beginPath();

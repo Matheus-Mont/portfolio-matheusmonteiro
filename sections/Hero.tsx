@@ -42,7 +42,10 @@ export default function Hero() {
       className="relative flex min-h-[100dvh] items-center pt-24 pb-16"
     >
       <div className="mx-auto grid w-full max-w-[1400px] items-center gap-12 px-5 lg:grid-cols-12 lg:gap-8">
-        <motion.div style={calm ? undefined : { y: copyY, opacity: fade }} className="lg:col-span-7">
+        <motion.div
+          style={calm ? undefined : { y: copyY, opacity: fade }}
+          className={calm ? "lg:col-span-9" : "lg:col-span-7"}
+        >
           <h1
             aria-label={lines.join(" ")}
             className="font-display text-[clamp(2.05rem,5.1vw,3.45rem)] leading-[1.06] font-semibold tracking-tight"
@@ -103,65 +106,68 @@ export default function Hero() {
           </motion.div>
         </motion.div>
 
-        <motion.div
-          style={calm ? undefined : { y: lensY }}
-          className="relative mx-auto w-full max-w-[420px] lg:col-span-5 lg:max-w-none"
-        >
+        {/* No lens in calm mode: with the culture switched off it is just an empty ring. */}
+        {!calm && (
           <motion.div
-            ref={lensRef}
-            onPointerMove={onLensMove}
-            onPointerLeave={() => {
-              tiltX.set(0);
-              tiltY.set(0);
-            }}
-            style={calm ? undefined : { rotateX, rotateY, transformPerspective: 900 }}
-            className="relative aspect-square w-full overflow-hidden rounded-full"
-            aria-label={t.hero.slideAria}
-            role="img"
+            style={calm ? undefined : { y: lensY }}
+            className="relative mx-auto w-full max-w-[420px] lg:col-span-5 lg:max-w-none"
           >
-            <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle_at_50%_45%,rgba(61,232,192,0.12),rgba(5,8,10,0.45)_72%)]" />
-            {/* Inside the lens the culture is rendered at a higher pixel ratio
-                and never blurred: looking through the microscope is the sharp view. */}
-            <MicrobeSwarm
-              density={2.6}
-              interactive={false}
-              light={false}
-              sharp
-              className="absolute inset-0 h-full w-full rounded-full"
-            />
-            <div className="absolute inset-0 rounded-full border border-biolum/25 bg-biolum/[0.03] backdrop-saturate-150" />
-            <div className="absolute inset-[9%] rounded-full border border-biolum/15" />
-            <div className="absolute inset-[26%] rounded-full border border-plasma/20" />
-            <div
-              className="absolute inset-[3%] rounded-full border border-dashed border-biolum/20 motion-safe:animate-[spin_60s_linear_infinite]"
-              aria-hidden
-            />
-            <svg viewBox="0 0 200 200" className="absolute inset-0 h-full w-full" aria-hidden>
-              {ticks.map((deg) => {
-                const long = deg % 90 === 0;
-                const rInner = long ? 89 : 93;
-                const rOuter = 96;
-                const rad = (deg * Math.PI) / 180;
-                const round = (n: number) => Math.round(n * 100) / 100;
-                return (
-                  <line
-                    key={deg}
-                    x1={round(100 + rInner * Math.cos(rad))}
-                    y1={round(100 + rInner * Math.sin(rad))}
-                    x2={round(100 + rOuter * Math.cos(rad))}
-                    y2={round(100 + rOuter * Math.sin(rad))}
-                    stroke="#3de8c0"
-                    strokeOpacity={long ? 0.34 : 0.16}
-                    strokeWidth={long ? 1 : 0.6}
-                  />
-                );
-              })}
-              <line x1="100" y1="72" x2="100" y2="128" stroke="#3de8c0" strokeOpacity="0.22" />
-              <line x1="72" y1="100" x2="128" y2="100" stroke="#3de8c0" strokeOpacity="0.22" />
-            </svg>
-            <div className="absolute inset-0 rounded-full shadow-[inset_0_1px_0_rgba(230,240,238,0.12),inset_0_-30px_60px_-30px_rgba(61,232,192,0.35)]" />
+            <motion.div
+              ref={lensRef}
+              onPointerMove={onLensMove}
+              onPointerLeave={() => {
+                tiltX.set(0);
+                tiltY.set(0);
+              }}
+              style={calm ? undefined : { rotateX, rotateY, transformPerspective: 900 }}
+              className="relative aspect-square w-full overflow-hidden rounded-full"
+              aria-label={t.hero.slideAria}
+              role="img"
+            >
+              <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle_at_50%_45%,rgba(61,232,192,0.12),rgba(5,8,10,0.45)_72%)]" />
+              {/* Inside the lens the culture is rendered at a higher pixel ratio
+                  and never blurred: looking through the microscope is the sharp view. */}
+              <MicrobeSwarm
+                density={2.6}
+                interactive={false}
+                light={false}
+                sharp
+                className="absolute inset-0 h-full w-full rounded-full"
+              />
+              <div className="absolute inset-0 rounded-full border border-biolum/25 bg-biolum/[0.03] backdrop-saturate-150" />
+              <div className="absolute inset-[9%] rounded-full border border-biolum/15" />
+              <div className="absolute inset-[26%] rounded-full border border-plasma/20" />
+              <div
+                className="absolute inset-[3%] rounded-full border border-dashed border-biolum/20 motion-safe:animate-[spin_60s_linear_infinite]"
+                aria-hidden
+              />
+              <svg viewBox="0 0 200 200" className="absolute inset-0 h-full w-full" aria-hidden>
+                {ticks.map((deg) => {
+                  const long = deg % 90 === 0;
+                  const rInner = long ? 89 : 93;
+                  const rOuter = 96;
+                  const rad = (deg * Math.PI) / 180;
+                  const round = (n: number) => Math.round(n * 100) / 100;
+                  return (
+                    <line
+                      key={deg}
+                      x1={round(100 + rInner * Math.cos(rad))}
+                      y1={round(100 + rInner * Math.sin(rad))}
+                      x2={round(100 + rOuter * Math.cos(rad))}
+                      y2={round(100 + rOuter * Math.sin(rad))}
+                      stroke="#3de8c0"
+                      strokeOpacity={long ? 0.34 : 0.16}
+                      strokeWidth={long ? 1 : 0.6}
+                    />
+                  );
+                })}
+                <line x1="100" y1="72" x2="100" y2="128" stroke="#3de8c0" strokeOpacity="0.22" />
+                <line x1="72" y1="100" x2="128" y2="100" stroke="#3de8c0" strokeOpacity="0.22" />
+              </svg>
+              <div className="absolute inset-0 rounded-full shadow-[inset_0_1px_0_rgba(230,240,238,0.12),inset_0_-30px_60px_-30px_rgba(61,232,192,0.35)]" />
+            </motion.div>
           </motion.div>
-        </motion.div>
+        )}
       </div>
     </section>
   );
