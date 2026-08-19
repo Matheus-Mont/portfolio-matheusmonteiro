@@ -30,7 +30,7 @@ export default function BackToTop() {
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.8 }}
           transition={{ duration: 0.25 }}
-          className="fixed right-5 bottom-24 z-40 grid h-11 w-11 place-items-center rounded-full border border-biolum/25 bg-abyss-2/90 text-tissue-dim backdrop-blur transition-colors duration-200 hover:border-biolum/60 hover:text-tissue"
+          className="fixed right-[26px] bottom-24 z-40 grid h-11 w-11 place-items-center rounded-full border border-biolum/25 bg-abyss-2/90 text-tissue-dim backdrop-blur transition-colors duration-200 hover:border-biolum/60 hover:text-tissue"
         >
           <ArrowUp size={18} aria-hidden />
         </motion.a>

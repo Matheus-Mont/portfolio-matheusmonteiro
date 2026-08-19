@@ -94,7 +94,7 @@ export default function Work() {
       id="projetos"
       className="border-y border-biolum/10 bg-abyss-2/70 py-24 sm:py-32"
     >
-      <div className="mx-auto flex max-w-[1400px] flex-wrap items-end justify-between gap-6 px-5">
+      <div className="mx-auto flex max-w-[1400px] flex-wrap items-end justify-between gap-6 px-6 sm:px-5">
         <Reveal>
           <h2 className="font-display text-3xl font-semibold tracking-tight sm:text-4xl lg:text-5xl">
             {t.work.title}
@@ -115,14 +115,14 @@ export default function Work() {
         tabIndex={0}
         role="region"
         aria-label={t.work.hint}
-        className="mt-10 flex snap-x snap-mandatory gap-5 overflow-x-auto px-5 pb-4 [scrollbar-width:none] lg:mt-14 lg:cursor-grab lg:active:cursor-grabbing [&::-webkit-scrollbar]:hidden"
+        className="mt-10 flex snap-x snap-mandatory gap-5 overflow-x-auto px-6 pb-4 sm:px-5 [scrollbar-width:none] lg:mt-14 lg:cursor-grab lg:active:cursor-grabbing [&::-webkit-scrollbar]:hidden"
       >
         {projects.map((project) => {
           const item = t.work.items[project.id];
           return (
             <article
               key={project.id}
-              className="flex w-[85vw] shrink-0 snap-start flex-col overflow-hidden rounded-[14px] border border-biolum/18 bg-abyss-3/80 sm:w-[62vw] lg:w-[40vw] xl:w-[33vw]"
+              className="flex w-[78vw] shrink-0 snap-start flex-col overflow-hidden rounded-[14px] border border-biolum/18 bg-abyss-3/80 sm:w-[62vw] lg:w-[40vw] xl:w-[33vw]"
             >
               <div className="relative aspect-[16/10] w-full shrink-0 overflow-hidden bg-abyss">
                 <Image
@@ -135,7 +135,7 @@ export default function Work() {
                 <div className="absolute inset-0 bg-gradient-to-t from-abyss-3/70 via-transparent to-transparent" />
               </div>
 
-              <div className="flex flex-1 flex-col gap-5 p-7 sm:p-8">
+              <div className="flex flex-1 flex-col gap-5 p-6 sm:p-8">
                 <div>
                   <h3 className="font-display text-2xl font-semibold tracking-tight">{item.name}</h3>
                   <p className="mt-1 text-sm text-biolum">{item.kind}</p>

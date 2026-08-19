@@ -16,7 +16,7 @@ export default function About() {
         <Reveal from="left" className="min-w-0 lg:col-span-5">
           <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[14px] border border-biolum/18">
             <Image
-              src="/photos/matheus-hero.jpg"
+              src="/photos/matheus-profile.jpg"
               alt={t.about.photoAlt}
               fill
               sizes="(min-width: 1024px) 40vw, 90vw"
