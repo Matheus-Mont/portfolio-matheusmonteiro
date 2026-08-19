@@ -35,9 +35,17 @@ export const projects = [
   },
 ] as const;
 
+/** Números reais, tirados do currículo. Nenhum deles é estimativa. */
+export const vitals = [
+  { value: 3, suffix: "", key: "years" },
+  { value: 92, suffix: "%", key: "faster" },
+  { value: 5, suffix: "", key: "monorepo" },
+  { value: 100, suffix: "%", key: "tests" },
+] as const;
+
 export const stack = [
-  "Next.js", "TypeScript", "Node.js", "React",
-  "Express", "PostgreSQL", "MySQL", "Prisma", "Docker",
+  "React", "Next.js", "TypeScript", "Node.js", "Express",
+  "React Native", "Jest", "Prisma", "MySQL", "MongoDB", "Docker", "Git",
 ] as const;
 
 export type ProjectId = (typeof projects)[number]["id"];

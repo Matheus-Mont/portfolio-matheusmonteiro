@@ -6,7 +6,7 @@ const pt = {
   meta: {
     title: "Matheus Oliveira | Sites, sistemas e landing pages que funcionam",
     description:
-      "Desenvolvedor full stack. Construo sites, sistemas e landing pages do zero, ou destravo os que já existem. Primeira conversa gratuita de 30 minutos.",
+      "Desenvolvedor full stack com quase 3 anos em ERP e sistemas corporativos: React, Next.js, Node e TypeScript. Também construo site e landing page do zero.",
   },
   nav: {
     links: [
@@ -28,10 +28,19 @@ const pt = {
   },
   hero: {
     titleLines: [profile.name, "Desenvolvedor full stack"],
-    sub: "Construo sites, sistemas e landing pages do zero, ou destravo os que já existem. Next.js, Node e TypeScript, na prática.",
+    sub: "Quase 3 anos construindo ERP e sistemas corporativos em produção. Também faço site e landing page do zero.",
     ctaPrimary: "Vamos conversar",
     ctaSecondary: "Ver os projetos",
     slideAria: "Cultura de microorganismos animada, apenas decorativa",
+  },
+  vitals: {
+    micro: "Disponível para vaga pleno remota ou híbrida, e para projeto fechado. Resposta em até 24 horas úteis.",
+    labels: {
+      years: "anos com ERP e sistemas corporativos",
+      faster: "menos tempo para criar um componente",
+      monorepo: "projetos usando o SDK que eu criei",
+      tests: "dos testes verdes antes de cada deploy",
+    },
   },
   symptoms: {
     title: "Reconhece algum destes sintomas?",
@@ -138,12 +147,12 @@ const pt = {
     ],
   },
   about: {
-    title: "Do briefing ao deploy, com o sistema inteiro de pé.",
+    title: "Quase 3 anos dentro de sistema que empresa usa todo dia.",
     body: [
-      "Trabalho com Next.js, Node e TypeScript. Pego o projeto na primeira conversa e levo até produção: banco modelado, testes automatizados, integração contínua e o site no ar respondendo rápido.",
-      "Entreguei o site institucional da Saúde Integrada para cliente real, sozinho, do briefing ao lançamento. Construí em equipe uma plataforma completa de delivery, com API separada do front-end. E mantenho no ar um produto autoral, o O Que Me Mordeu.",
-      "Antes de programar, eu queria ser biólogo. Estudo biologia e sou apaixonado por animais peçonhentos, cobras principalmente. Foi dessa curiosidade que nasceu o O Que Me Mordeu, de identificação e primeiros socorros.",
-      "Continuo achando que programar e estudar bicho é o mesmo trabalho. Software falha como organismo falha: quem derruba não é o defeito, é a defesa que não reagiu a tempo. Sou de São Pedro da Aldeia, no Rio de Janeiro, e atendo remoto.",
+      "Fui desenvolvedor full stack na Sil Sistemas de Gestão, de julho de 2022 a abril de 2025. Trabalhei nos módulos de ERP que a empresa usava para rodar finanças, transporte, funcionários e processos, com React, Next.js e TypeScript.",
+      "Criei o SDK interno de interface (formulários, tabelas, hooks, cliente HTTP) que os 5 projetos do monorepo adotaram. Criar um componente novo caiu de 3 dias para menos de 2 horas. Também deixei os testes com Jest como porteiro obrigatório: nada sobe sem 100% verde.",
+      "Antes disso fui monitor de Algoritmos e Programação em Python na UFRJ por um ano e meio, explicando lógica para quem estava começando. Sou tecnólogo em Análise e Desenvolvimento de Sistemas pela Estácio e fiz os 1.500h de full stack na Trybe.",
+      "Fora do trabalho, eu quase fui biólogo: estudo biologia e sou apaixonado por animais peçonhentos, cobras principalmente. Software falha como organismo falha, quem derruba não é o defeito, é a defesa que não reagiu a tempo. Sou de São Pedro da Aldeia, no Rio, e atendo remoto.",
     ],
     photoAlt: "Matheus Oliveira, desenvolvedor full stack",
     stackTitle: "O que eu uso no dia a dia",
@@ -176,7 +185,7 @@ const pt = {
       },
       {
         q: "Você trabalha por projeto ou contratado?",
-        a: "Os dois. Fecho projeto com preço fixo e também entro em time por período, como PJ. Se você recruta, me chame que eu mando o currículo e os projetos completos.",
+        a: "Os dois. Estou em recolocação, com disponibilidade imediata para vaga pleno remota ou híbrida, e também fecho projeto com preço fixo. Se você recruta, me chame que eu mando o currículo completo.",
       },
       {
         q: "Depois de entregar, você some?",
@@ -233,7 +242,7 @@ const en: Dict = {
   meta: {
     title: "Matheus Oliveira | Websites, systems and landing pages that work",
     description:
-      "Full stack developer. I build sites, systems and landing pages from scratch, or unstick the ones that already exist. Free 30 minute first call.",
+      "Full stack developer with nearly 3 years in ERP and corporate systems: React, Next.js, Node and TypeScript. I also build websites and landing pages from scratch.",
   },
   nav: {
     links: [
@@ -255,10 +264,19 @@ const en: Dict = {
   },
   hero: {
     titleLines: [profile.name, "Full stack developer"],
-    sub: "I build websites, systems and landing pages from scratch, or unstick the ones that already exist. Next.js, Node and TypeScript, in practice.",
+    sub: "Nearly 3 years building ERP and corporate systems in production. I also build websites and landing pages from scratch.",
     ctaPrimary: "Let's talk",
     ctaSecondary: "See the work",
     slideAria: "Animated culture of microorganisms, decorative only",
+  },
+  vitals: {
+    micro: "Open to a mid-level remote or hybrid role, and to fixed-price projects. I reply within 24 working hours.",
+    labels: {
+      years: "years with ERP and corporate systems",
+      faster: "less time to build a component",
+      monorepo: "projects using the SDK I built",
+      tests: "of tests green before every deploy",
+    },
   },
   symptoms: {
     title: "Any of these look familiar?",
@@ -365,12 +383,12 @@ const en: Dict = {
     ],
   },
   about: {
-    title: "From briefing to deploy, with the whole system standing.",
+    title: "Nearly 3 years inside software a company runs on daily.",
     body: [
-      "I work with Next.js, Node and TypeScript. I take a project from the first call all the way to production: a modelled database, automated tests, continuous integration and a site that answers fast.",
-      "I delivered the Saúde Integrada website for a real client on my own, from briefing to launch. I built a full delivery platform with a team, its API separate from the front-end. And I keep my own product live, O Que Me Mordeu.",
-      "Before code, I wanted to be a biologist. I study biology and I'm passionate about venomous animals, snakes especially. That curiosity is where O Que Me Mordeu, an identification and first-aid app, came from.",
-      "I still think coding and studying animals are the same job. Software fails the way an organism fails: it's not the bug that brings it down, it's the defence that reacted too late. I'm from São Pedro da Aldeia, in Rio de Janeiro, and I work remote.",
+      "I was a full stack developer at Sil Sistemas de Gestão, from July 2022 to April 2025. I worked on the ERP modules the company ran its finance, transport, staff and process operations on, with React, Next.js and TypeScript.",
+      "I built the internal UI SDK (forms, tables, hooks, HTTP client) adopted by all 5 projects in the monorepo. Building a new component went from 3 days to under 2 hours. I also made Jest tests a required gate: nothing ships unless everything is green.",
+      "Before that I spent a year and a half as a teaching assistant for Algorithms and Programming in Python at UFRJ, explaining logic to absolute beginners. I hold a technologist degree in Systems Analysis and Development from Estácio, plus Trybe's 1,500-hour full stack program.",
+      "Outside work I nearly became a biologist: I study biology and I'm passionate about venomous animals, snakes especially. Software fails the way an organism fails, it's not the bug that brings it down, it's the defence that reacted too late. I'm from São Pedro da Aldeia, in Rio, and I work remote.",
     ],
     photoAlt: "Matheus Oliveira, full stack developer",
     stackTitle: "What I work with",
@@ -403,7 +421,7 @@ const en: Dict = {
       },
       {
         q: "Do you work per project or as a hire?",
-        a: "Both. I take fixed price projects and I also join teams for a period as a contractor. If you are hiring, message me and I will send my full CV and projects.",
+        a: "Both. I'm currently open to a mid-level remote or hybrid role, available immediately, and I also take fixed-price projects. If you are hiring, message me and I will send my full CV.",
       },
       {
         q: "Do you disappear after delivery?",

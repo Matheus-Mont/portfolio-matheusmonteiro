@@ -7,6 +7,7 @@ import Offer from "@/sections/Offer";
 import Protocol from "@/sections/Protocol";
 import Services from "@/sections/Services";
 import Symptoms from "@/sections/Symptoms";
+import Vitals from "@/sections/Vitals";
 import WhyMe from "@/sections/WhyMe";
 import Work from "@/sections/Work";
 
@@ -14,6 +15,7 @@ export default function Page() {
   return (
     <>
       <Hero />
+      <Vitals />
       <Symptoms />
       <WhyMe />
       <Services />
