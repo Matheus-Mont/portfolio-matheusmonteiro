@@ -1,5 +1,6 @@
 import About from "@/sections/About";
 import Contact from "@/sections/Contact";
+import Education from "@/sections/Education";
 import Faq from "@/sections/Faq";
 import Footer from "@/sections/Footer";
 import Hero from "@/sections/Hero";
@@ -22,6 +23,7 @@ export default function Page() {
       <Work />
       <Protocol />
       <About />
+      <Education />
       <Offer />
       <Faq />
       <Contact />

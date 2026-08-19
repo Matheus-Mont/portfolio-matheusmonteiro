@@ -43,6 +43,16 @@ export const vitals = [
   { value: 100, suffix: "%", key: "tests" },
 ] as const;
 
+/** Formação, do mais recente para o mais antigo. */
+export const education = [
+  { id: "ads", period: "2025", org: "Estácio" },
+  { id: "python", period: "2023", org: "IGTI" },
+  { id: "trybe", period: "2022", org: "Trybe" },
+  { id: "ifrj", period: "2013 - 2017", org: "IFRJ" },
+] as const;
+
+export type EducationId = (typeof education)[number]["id"];
+
 export const stack = [
   "React", "Next.js", "TypeScript", "Node.js", "Express",
   "React Native", "Jest", "Prisma", "MySQL", "MongoDB", "Docker", "Git",

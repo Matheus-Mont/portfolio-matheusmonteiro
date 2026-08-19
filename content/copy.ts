@@ -157,6 +157,20 @@ const pt = {
     photoAlt: "Matheus Oliveira, desenvolvedor full stack",
     stackTitle: "O que eu uso no dia a dia",
   },
+  education: {
+    title: "Formação",
+    items: {
+      ads: "Tecnólogo em Análise e Desenvolvimento de Sistemas",
+      python: "Bootcamp Desenvolvedor Python",
+      trybe: "Desenvolvimento Web Full Stack, 1.500 horas",
+      ifrj: "Técnico em Informática",
+    },
+    languagesTitle: "Idiomas",
+    languages: [
+      { name: "Português", level: "nativo" },
+      { name: "Inglês", level: "avançado, de documentação a escrita técnica" },
+    ],
+  },
   offer: {
     title: "Conversa gratuita de 30 minutos",
     body: "Site novo, sistema travado ou uma ideia ainda no papel. Você me conta o que precisa, eu digo como eu faria. Sem cobrança e sem compromisso.",
@@ -392,6 +406,20 @@ const en: Dict = {
     ],
     photoAlt: "Matheus Oliveira, full stack developer",
     stackTitle: "What I work with",
+  },
+  education: {
+    title: "Education",
+    items: {
+      ads: "Technologist in Systems Analysis and Development",
+      python: "Python Developer Bootcamp",
+      trybe: "Full Stack Web Development, 1,500 hours",
+      ifrj: "Technical Diploma in Computing",
+    },
+    languagesTitle: "Languages",
+    languages: [
+      { name: "Portuguese", level: "native" },
+      { name: "English", level: "advanced, from documentation to technical writing" },
+    ],
   },
   offer: {
     title: "Free 30 minute call",
