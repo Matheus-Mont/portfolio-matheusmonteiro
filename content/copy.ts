@@ -1,3 +1,5 @@
+import { profile } from "@/content/profile";
+
 export type Lang = "pt" | "en";
 
 const pt = {
@@ -25,8 +27,8 @@ const pt = {
     calmOffAria: "Ligar as animações da página",
   },
   hero: {
-    titleLines: ["Construo produtos novos.", "Resgato os que travaram."],
-    sub: "Desenvolvedor full stack. Sites, sistemas e landing pages do zero, ou destravo os que já existem. Next.js, Node e TypeScript, na prática.",
+    titleLines: [profile.name, "Desenvolvedor full stack"],
+    sub: "Construo sites, sistemas e landing pages do zero, ou destravo os que já existem. Next.js, Node e TypeScript, na prática.",
     ctaPrimary: "Vamos conversar",
     ctaSecondary: "Ver os projetos",
     slideAria: "Cultura de microorganismos animada, apenas decorativa",
@@ -136,11 +138,12 @@ const pt = {
     ],
   },
   about: {
-    title: "Antes de programar, eu queria ser biólogo.",
+    title: "Do briefing ao deploy, com o sistema inteiro de pé.",
     body: [
-      "Estudo biologia e sou apaixonado por animais peçonhentos, cobras principalmente. Foi dessa curiosidade que nasceu o O Que Me Mordeu, meu aplicativo autoral de identificação e primeiros socorros.",
-      "Continuo achando que programar e estudar bicho é o mesmo trabalho. Software falha como organismo falha: quem derruba não é o defeito, é a defesa que não reagiu a tempo.",
-      "Sou de São Pedro da Aldeia, no Rio de Janeiro, e atendo remoto para qualquer lugar do Brasil.",
+      "Trabalho com Next.js, Node e TypeScript. Pego o projeto na primeira conversa e levo até produção: banco modelado, testes automatizados, integração contínua e o site no ar respondendo rápido.",
+      "Entreguei o site institucional da Saúde Integrada para cliente real, sozinho, do briefing ao lançamento. Construí em equipe uma plataforma completa de delivery, com API separada do front-end. E mantenho no ar um produto autoral, o O Que Me Mordeu.",
+      "Antes de programar, eu queria ser biólogo. Estudo biologia e sou apaixonado por animais peçonhentos, cobras principalmente. Foi dessa curiosidade que nasceu o O Que Me Mordeu, de identificação e primeiros socorros.",
+      "Continuo achando que programar e estudar bicho é o mesmo trabalho. Software falha como organismo falha: quem derruba não é o defeito, é a defesa que não reagiu a tempo. Sou de São Pedro da Aldeia, no Rio de Janeiro, e atendo remoto.",
     ],
     photoAlt: "Matheus Oliveira, desenvolvedor full stack",
     stackTitle: "O que eu uso no dia a dia",
@@ -251,8 +254,8 @@ const en: Dict = {
     calmOffAria: "Turn page animations on",
   },
   hero: {
-    titleLines: ["I build new products.", "I rescue the broken ones."],
-    sub: "Full stack developer. Sites, systems and landing pages from scratch, or I unstick the ones that already exist. Next.js, Node and TypeScript, in practice.",
+    titleLines: [profile.name, "Full stack developer"],
+    sub: "I build websites, systems and landing pages from scratch, or unstick the ones that already exist. Next.js, Node and TypeScript, in practice.",
     ctaPrimary: "Let's talk",
     ctaSecondary: "See the work",
     slideAria: "Animated culture of microorganisms, decorative only",
@@ -362,11 +365,12 @@ const en: Dict = {
     ],
   },
   about: {
-    title: "Before code, I wanted to be a biologist.",
+    title: "From briefing to deploy, with the whole system standing.",
     body: [
-      "I study biology and I'm passionate about venomous animals, snakes especially. That curiosity is where O Que Me Mordeu, my own identification and first-aid app, came from.",
-      "I still think coding and studying animals are the same job. Software fails the way an organism fails: it's not the bug that brings it down, it's the defence that reacted too late.",
-      "I'm from São Pedro da Aldeia, in Rio de Janeiro, and I work remote for anywhere in Brazil.",
+      "I work with Next.js, Node and TypeScript. I take a project from the first call all the way to production: a modelled database, automated tests, continuous integration and a site that answers fast.",
+      "I delivered the Saúde Integrada website for a real client on my own, from briefing to launch. I built a full delivery platform with a team, its API separate from the front-end. And I keep my own product live, O Que Me Mordeu.",
+      "Before code, I wanted to be a biologist. I study biology and I'm passionate about venomous animals, snakes especially. That curiosity is where O Que Me Mordeu, an identification and first-aid app, came from.",
+      "I still think coding and studying animals are the same job. Software fails the way an organism fails: it's not the bug that brings it down, it's the defence that reacted too late. I'm from São Pedro da Aldeia, in Rio de Janeiro, and I work remote.",
     ],
     photoAlt: "Matheus Oliveira, full stack developer",
     stackTitle: "What I work with",
