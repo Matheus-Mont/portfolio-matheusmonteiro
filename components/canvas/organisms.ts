@@ -147,16 +147,17 @@ export function startSwarm(canvas: HTMLCanvasElement, options: SwarmOptions = {}
     ctx!.closePath();
   }
 
-  // The nucleus of each organism is a scrap of source code. Drawn upright
-  // regardless of how the body is rotated, otherwise the glyphs read upside down.
-  function drawNucleus(glyph: string, size: number, bodyAngle: number, rgb: string, alpha: number) {
+  // The nucleus of each organism is a scrap of source code. It rides along with
+  // the body's rotation so it always stays inside the membrane, even when that
+  // leaves it upside down. Counter-rotating to keep it readable made wide
+  // glyphs poke out of the cell.
+  function drawNucleus(glyph: string, size: number, maxWidth: number, rgb: string, alpha: number) {
     ctx!.save();
-    ctx!.rotate(-bodyAngle);
     ctx!.font = `600 ${size.toFixed(2)}px ui-monospace, SFMono-Regular, Menlo, monospace`;
     ctx!.textAlign = "center";
     ctx!.textBaseline = "middle";
     ctx!.fillStyle = `rgba(${rgb}, ${alpha})`;
-    ctx!.fillText(glyph, 0, 0);
+    ctx!.fillText(glyph, 0, 0, maxWidth);
     ctx!.restore();
   }
 
@@ -192,7 +193,7 @@ export function startSwarm(canvas: HTMLCanvasElement, options: SwarmOptions = {}
     ctx!.strokeStyle = `rgba(${rgb}, 0.5)`;
     ctx!.lineWidth = 1;
     ctx!.stroke();
-    drawNucleus("</>", o.size * 1.1, bodyAngle, rgb, 0.6);
+    drawNucleus("</>", o.size * 1.1, length - radius * 1.6, rgb, 0.6);
     ctx!.restore();
   }
 
@@ -213,7 +214,7 @@ export function startSwarm(canvas: HTMLCanvasElement, options: SwarmOptions = {}
     ctx!.lineWidth = 1;
     ctx!.stroke();
 
-    drawNucleus("@", o.size * 1.15, bodyAngle, rgb, 0.62);
+    drawNucleus("@", o.size * 1.15, rx * 1.5, rgb, 0.62);
 
     const count = 20;
     ctx!.beginPath();
@@ -268,7 +269,7 @@ export function startSwarm(canvas: HTMLCanvasElement, options: SwarmOptions = {}
     ctx!.lineWidth = 1;
     ctx!.stroke();
 
-    drawNucleus("{}", o.size * 1.05, o.angle, rgb, 0.6);
+    drawNucleus("{}", o.size * 1.05, r * 1.5, rgb, 0.6);
 
     const spikes = 9;
     ctx!.beginPath();
