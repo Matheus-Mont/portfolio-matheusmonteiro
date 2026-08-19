@@ -55,7 +55,9 @@ export function startSwarm(canvas: HTMLCanvasElement, options: SwarmOptions = {}
   let width = 0;
   let height = 0;
   let organisms: Organism[] = [];
-  const pointer = { x: -9999, y: -9999, active: false };
+  // `target` is where the influence is heading (1 engaged, 0 released) and
+  // `strength` eases toward it, so touch fades in and out instead of snapping.
+  const pointer = { x: -9999, y: -9999, target: 0, strength: 0 };
   let frame = 0;
   let running = true;
 
@@ -299,22 +301,24 @@ export function startSwarm(canvas: HTMLCanvasElement, options: SwarmOptions = {}
     frame += 1;
     ctx!.clearRect(0, 0, width, height);
 
-    if (light && pointer.active) {
+    pointer.strength += (pointer.target - pointer.strength) * 0.08;
+
+    if (light && pointer.strength > 0.01) {
       ctx!.globalCompositeOperation = "lighter";
-      ctx!.globalAlpha = 0.1;
+      ctx!.globalAlpha = 0.1 * pointer.strength;
       ctx!.drawImage(lightSprite, pointer.x - 180, pointer.y - 180, 360, 360);
       ctx!.globalAlpha = 1;
       ctx!.globalCompositeOperation = "source-over";
     }
 
     for (const o of organisms) {
-      if (interactive && pointer.active) {
+      if (interactive && pointer.strength > 0.01) {
         const dx = o.x - pointer.x;
         const dy = o.y - pointer.y;
         const dist2 = dx * dx + dy * dy;
         if (dist2 < 42000 && dist2 > 1) {
           const dist = Math.sqrt(dist2);
-          const force = (1 - dist / 205) * 0.35;
+          const force = (1 - dist / 205) * 0.35 * pointer.strength;
           // Ciliates swim toward the light; rods and viruses flee it.
           // A negative sign pulls the organism to the pointer.
           const sign = o.species === "ciliate" ? -1.15 : o.species === "rod" ? 0.95 : 1.25;
@@ -357,15 +361,31 @@ export function startSwarm(canvas: HTMLCanvasElement, options: SwarmOptions = {}
     resizeTimer = window.setTimeout(build, 180);
   };
 
-  const onPointerMove = (event: PointerEvent) => {
+  const track = (event: PointerEvent) => {
     const rect = canvas.getBoundingClientRect();
     pointer.x = event.clientX - rect.left;
     pointer.y = event.clientY - rect.top;
-    pointer.active = true;
+  };
+
+  // A mouse hovers, so movement alone engages it. A finger has to be down:
+  // touch only reports pointermove while pressed, and the release events are
+  // the only signal that the light should let go.
+  const onPointerMove = (event: PointerEvent) => {
+    track(event);
+    pointer.target = 1;
+  };
+
+  const onPointerDown = (event: PointerEvent) => {
+    track(event);
+    pointer.target = 1;
+  };
+
+  const onPointerRelease = (event: PointerEvent) => {
+    if (event.pointerType !== "mouse") pointer.target = 0;
   };
 
   const onPointerLeave = () => {
-    pointer.active = false;
+    pointer.target = 0;
   };
 
   const onVisibility = () => {
@@ -384,6 +404,9 @@ export function startSwarm(canvas: HTMLCanvasElement, options: SwarmOptions = {}
   document.addEventListener("visibilitychange", onVisibility);
   if (interactive) {
     window.addEventListener("pointermove", onPointerMove, { passive: true });
+    window.addEventListener("pointerdown", onPointerDown, { passive: true });
+    window.addEventListener("pointerup", onPointerRelease, { passive: true });
+    window.addEventListener("pointercancel", onPointerRelease, { passive: true });
     document.addEventListener("pointerleave", onPointerLeave);
   }
 
@@ -394,6 +417,9 @@ export function startSwarm(canvas: HTMLCanvasElement, options: SwarmOptions = {}
     window.removeEventListener("resize", onResize);
     document.removeEventListener("visibilitychange", onVisibility);
     window.removeEventListener("pointermove", onPointerMove);
+    window.removeEventListener("pointerdown", onPointerDown);
+    window.removeEventListener("pointerup", onPointerRelease);
+    window.removeEventListener("pointercancel", onPointerRelease);
     document.removeEventListener("pointerleave", onPointerLeave);
   };
 }
