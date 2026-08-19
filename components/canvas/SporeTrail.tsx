@@ -64,11 +64,11 @@ export default function SporeTrail() {
           y: event.clientY,
           vx: (Math.random() - 0.5) * 1.1,
           vy: (Math.random() - 0.5) * 1.1,
-          life: 0.8 + Math.random() * 0.5,
+          life: 0.35 + Math.random() * 0.25,
           size: 1.5 + Math.random() * 3.5,
         });
       }
-      if (spores.length > 220) spores.splice(0, spores.length - 220);
+      if (spores.length > 130) spores.splice(0, spores.length - 130);
       if (!alive) {
         alive = true;
         raf = requestAnimationFrame(draw);

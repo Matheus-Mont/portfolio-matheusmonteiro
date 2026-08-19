@@ -57,10 +57,40 @@ export function startSwarm(canvas: HTMLCanvasElement, options: SwarmOptions = {}
   let frame = 0;
   let running = true;
 
+  function makeOrganism(w: number, h: number): Organism {
+    const roll = Math.random();
+    const species: Species = roll < mix[0] ? "rod" : roll < mix[0] + mix[1] ? "ciliate" : "virus";
+    return {
+      species,
+      x: Math.random() * w,
+      y: Math.random() * h,
+      vx: (Math.random() - 0.5) * 0.3,
+      vy: (Math.random() - 0.5) * 0.3,
+      size: species === "rod" ? 5 + Math.random() * 5 : species === "ciliate" ? 8 + Math.random() * 7 : 6 + Math.random() * 6,
+      angle: Math.random() * Math.PI * 2,
+      spin: (Math.random() - 0.5) * 0.008,
+      phase: Math.random() * Math.PI * 2,
+      detail: 0,
+      hue: Math.random() > 0.72 ? 1 : 0,
+    };
+  }
+
   function build() {
     const rect = canvas.getBoundingClientRect();
-    width = Math.max(rect.width, 1);
-    height = Math.max(rect.height, 1);
+    const newWidth = Math.max(rect.width, 1);
+    const newHeight = Math.max(rect.height, 1);
+
+    // Mobile browsers fire resize when the address bar hides/shows on scroll.
+    // Skip no-op calls, and reposition (never respawn) on real ones, so the
+    // culture drifts instead of teleporting to brand-new random specimens.
+    if (organisms.length > 0 && Math.abs(newWidth - width) < 1 && Math.abs(newHeight - height) < 1) {
+      return;
+    }
+
+    const prevWidth = width || newWidth;
+    const prevHeight = height || newHeight;
+    width = newWidth;
+    height = newHeight;
     canvas.width = Math.round(width * dpr);
     canvas.height = Math.round(height * dpr);
     ctx!.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -70,23 +100,22 @@ export function startSwarm(canvas: HTMLCanvasElement, options: SwarmOptions = {}
     const budget = coarse || cores <= 4 ? 0.5 : 1;
     const count = Math.max(8, Math.min(60, Math.round(base * density * budget)));
 
-    organisms = Array.from({ length: count }, () => {
-      const roll = Math.random();
-      const species: Species = roll < mix[0] ? "rod" : roll < mix[0] + mix[1] ? "ciliate" : "virus";
-      return {
-        species,
-        x: Math.random() * width,
-        y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.3,
-        vy: (Math.random() - 0.5) * 0.3,
-        size: species === "rod" ? 5 + Math.random() * 5 : species === "ciliate" ? 8 + Math.random() * 7 : 6 + Math.random() * 6,
-        angle: Math.random() * Math.PI * 2,
-        spin: (Math.random() - 0.5) * 0.008,
-        phase: Math.random() * Math.PI * 2,
-        detail: 0,
-        hue: Math.random() > 0.72 ? 1 : 0,
-      };
-    });
+    if (organisms.length === 0) {
+      organisms = Array.from({ length: count }, () => makeOrganism(width, height));
+      return;
+    }
+
+    const scaleX = width / prevWidth;
+    const scaleY = height / prevHeight;
+    for (const o of organisms) {
+      o.x *= scaleX;
+      o.y *= scaleY;
+    }
+    if (organisms.length < count) {
+      for (let i = organisms.length; i < count; i++) organisms.push(makeOrganism(width, height));
+    } else if (organisms.length > count) {
+      organisms.length = count;
+    }
   }
 
   function capsulePath(length: number, radius: number) {
