@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { motion, useMotionValue, useScroll, useSpring, useTransform } from "motion/react";
 import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
 import { ButtonLink } from "@/components/Button";
+import MicrobeSwarm from "@/components/canvas/MicrobeSwarm";
 import { useCalm } from "@/lib/MotionProvider";
 import { useLang } from "@/lib/LangProvider";
 
@@ -32,6 +33,7 @@ export default function Hero() {
 
   const lines = t.hero.titleLines;
   let charIndex = 0;
+  const ticks = Array.from({ length: 24 }, (_, i) => i * 15);
 
   return (
     <section
@@ -117,7 +119,14 @@ export default function Hero() {
             aria-label={t.hero.slideAria}
             role="img"
           >
-            <div className="absolute inset-0 rounded-full border border-biolum/25 bg-biolum/[0.03] backdrop-blur-[2px] backdrop-saturate-150" />
+            <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle_at_50%_45%,rgba(61,232,192,0.12),rgba(5,8,10,0.45)_72%)]" />
+            <MicrobeSwarm
+              density={2.6}
+              interactive={false}
+              light={false}
+              className="absolute inset-0 h-full w-full rounded-full"
+            />
+            <div className="absolute inset-0 rounded-full border border-biolum/25 bg-biolum/[0.03] backdrop-blur-[1px] backdrop-saturate-150" />
             <div className="absolute inset-[9%] rounded-full border border-biolum/15" />
             <div className="absolute inset-[26%] rounded-full border border-plasma/20" />
             <div
@@ -125,6 +134,25 @@ export default function Hero() {
               aria-hidden
             />
             <svg viewBox="0 0 200 200" className="absolute inset-0 h-full w-full" aria-hidden>
+              {ticks.map((deg) => {
+                const long = deg % 90 === 0;
+                const rInner = long ? 89 : 93;
+                const rOuter = 96;
+                const rad = (deg * Math.PI) / 180;
+                const round = (n: number) => Math.round(n * 100) / 100;
+                return (
+                  <line
+                    key={deg}
+                    x1={round(100 + rInner * Math.cos(rad))}
+                    y1={round(100 + rInner * Math.sin(rad))}
+                    x2={round(100 + rOuter * Math.cos(rad))}
+                    y2={round(100 + rOuter * Math.sin(rad))}
+                    stroke="#3de8c0"
+                    strokeOpacity={long ? 0.34 : 0.16}
+                    strokeWidth={long ? 1 : 0.6}
+                  />
+                );
+              })}
               <line x1="100" y1="72" x2="100" y2="128" stroke="#3de8c0" strokeOpacity="0.22" />
               <line x1="72" y1="100" x2="128" y2="100" stroke="#3de8c0" strokeOpacity="0.22" />
             </svg>

@@ -94,7 +94,7 @@ export default function Work() {
       id="projetos"
       className="border-y border-biolum/10 bg-abyss-2/70 py-24 sm:py-32"
     >
-      <div className="mx-auto flex max-w-[1400px] flex-wrap items-end justify-between gap-6 px-6 sm:px-5">
+      <div className="mx-auto flex max-w-[1400px] flex-wrap items-end justify-between gap-6 px-8 sm:px-5">
         <Reveal>
           <h2 className="font-display text-3xl font-semibold tracking-tight sm:text-4xl lg:text-5xl">
             {t.work.title}
@@ -115,16 +115,16 @@ export default function Work() {
         tabIndex={0}
         role="region"
         aria-label={t.work.hint}
-        className="mt-10 flex snap-x snap-mandatory gap-5 overflow-x-auto px-6 pb-4 sm:px-5 [scrollbar-width:none] lg:mt-14 lg:cursor-grab lg:active:cursor-grabbing [&::-webkit-scrollbar]:hidden"
+        className="mt-10 flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-pl-8 scroll-pr-8 pb-4 sm:scroll-pl-5 sm:scroll-pr-5 [scrollbar-width:none] lg:mt-14 lg:cursor-grab lg:active:cursor-grabbing [&::-webkit-scrollbar]:hidden"
       >
         {projects.map((project) => {
           const item = t.work.items[project.id];
           return (
             <article
               key={project.id}
-              className="flex w-[78vw] shrink-0 snap-start flex-col overflow-hidden rounded-[14px] border border-biolum/18 bg-abyss-3/80 sm:w-[62vw] lg:w-[40vw] xl:w-[33vw]"
+              className="flex w-[76vw] shrink-0 snap-start flex-col overflow-hidden rounded-[14px] border border-biolum/18 bg-abyss-3/80 first:ml-8 last:mr-8 sm:w-[62vw] sm:first:ml-5 sm:last:mr-5 lg:w-[40vw] xl:w-[33vw]"
             >
-              <div className="relative aspect-[16/10] w-full shrink-0 overflow-hidden bg-abyss">
+              <div className="relative aspect-[16/9] w-full shrink-0 overflow-hidden bg-abyss sm:aspect-[16/10]">
                 <Image
                   src={project.shot}
                   alt={`${item.name}: ${t.work.shotAlt}`}
@@ -135,24 +135,26 @@ export default function Work() {
                 <div className="absolute inset-0 bg-gradient-to-t from-abyss-3/70 via-transparent to-transparent" />
               </div>
 
-              <div className="flex flex-1 flex-col gap-5 p-6 sm:p-8">
+              <div className="flex flex-1 flex-col gap-4 p-5 sm:gap-5 sm:p-8">
                 <div>
-                  <h3 className="font-display text-2xl font-semibold tracking-tight">{item.name}</h3>
+                  <h3 className="font-display text-xl font-semibold tracking-tight sm:text-2xl">{item.name}</h3>
                   <p className="mt-1 text-sm text-biolum">{item.kind}</p>
                 </div>
 
-                <dl className="space-y-4 text-[0.95rem] leading-relaxed">
+                <dl className="space-y-3 text-sm leading-snug sm:space-y-4 sm:text-[0.95rem] sm:leading-relaxed">
                   {(["problem", "did", "result"] as const).map((key) => (
                     <div key={key}>
                       <dt className="font-display text-xs text-tissue-dim">{t.work.labels[key]}</dt>
-                      <dd className={key === "result" ? "text-tissue" : "text-tissue-dim"}>
+                      <dd
+                        className={`line-clamp-2 sm:line-clamp-none ${key === "result" ? "text-tissue" : "text-tissue-dim"}`}
+                      >
                         {item[key]}
                       </dd>
                     </div>
                   ))}
                 </dl>
 
-                <ul className="flex flex-wrap gap-2 pt-2">
+                <ul className="flex flex-wrap gap-2 pt-1 sm:pt-2">
                   {project.stack.map((tech) => (
                     <li
                       key={tech}
