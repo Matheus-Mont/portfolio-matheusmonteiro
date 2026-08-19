@@ -315,7 +315,9 @@ export function startSwarm(canvas: HTMLCanvasElement, options: SwarmOptions = {}
         if (dist2 < 42000 && dist2 > 1) {
           const dist = Math.sqrt(dist2);
           const force = (1 - dist / 205) * 0.35;
-          const sign = o.species === "virus" ? -0.5 : o.species === "rod" ? 0.45 : 1;
+          // Ciliates swim toward the light; rods and viruses flee it.
+          // A negative sign pulls the organism to the pointer.
+          const sign = o.species === "ciliate" ? -1.15 : o.species === "rod" ? 0.95 : 1.25;
           o.vx += (dx / dist) * force * sign;
           o.vy += (dy / dist) * force * sign;
         }
