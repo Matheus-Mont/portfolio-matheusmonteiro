@@ -1,0 +1,29 @@
+import About from "@/sections/About";
+import Contact from "@/sections/Contact";
+import Faq from "@/sections/Faq";
+import Footer from "@/sections/Footer";
+import Hero from "@/sections/Hero";
+import Offer from "@/sections/Offer";
+import Protocol from "@/sections/Protocol";
+import Services from "@/sections/Services";
+import Symptoms from "@/sections/Symptoms";
+import WhyMe from "@/sections/WhyMe";
+import Work from "@/sections/Work";
+
+export default function Page() {
+  return (
+    <>
+      <Hero />
+      <Symptoms />
+      <WhyMe />
+      <Services />
+      <Work />
+      <Protocol />
+      <About />
+      <Offer />
+      <Faq />
+      <Contact />
+      <Footer />
+    </>
+  );
+}
