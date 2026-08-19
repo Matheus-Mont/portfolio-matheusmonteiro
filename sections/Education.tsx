@@ -9,7 +9,7 @@ export default function Education() {
   const { t } = useLang();
 
   return (
-    <section id="formacao" className="mx-auto max-w-[1400px] px-5 pb-24 sm:pb-32">
+    <section id="formacao" className="mx-auto max-w-[1400px] px-5 py-24 sm:py-32">
       <Reveal>
         <h2 className="font-display text-3xl font-semibold tracking-tight sm:text-4xl lg:text-5xl">
           {t.education.title}
