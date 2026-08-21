@@ -148,7 +148,7 @@ export default function Work() {
         tabIndex={0}
         role="region"
         aria-label={t.work.hint}
-        className={`mt-10 flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-pl-8 scroll-pr-8 pb-4 sm:scroll-pl-5 sm:scroll-pr-5 [scrollbar-width:none] lg:mt-14 lg:grid lg:gap-6 lg:overflow-visible lg:px-5 lg:pb-0 [&::-webkit-scrollbar]:hidden ${columns}`}
+        className={`mt-10 flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-pl-8 scroll-pr-8 pb-4 sm:scroll-pl-5 sm:scroll-pr-5 [scrollbar-width:none] lg:mx-auto lg:mt-14 lg:grid lg:max-w-[1400px] lg:gap-6 lg:overflow-visible lg:px-5 lg:pb-0 [&::-webkit-scrollbar]:hidden ${columns}`}
       >
         {projects.map((project) => {
           const item = t.work.items[project.id];
