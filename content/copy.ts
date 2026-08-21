@@ -27,7 +27,7 @@ const pt = {
     calmOffAria: "Ligar as animações da página",
   },
   hero: {
-    titleLines: [profile.name, "Desenvolvedor full stack"],
+    titleLines: [profile.name, "Desenvolvedor Full Stack"],
     sub: "Quase 3 anos construindo ERP e sistemas corporativos em produção. Também faço site e landing page do zero.",
     ctaPrimary: "Vamos conversar",
     ctaSecondary: "Ver os projetos",
@@ -277,7 +277,7 @@ const en: Dict = {
     calmOffAria: "Turn page animations on",
   },
   hero: {
-    titleLines: [profile.name, "Full stack developer"],
+    titleLines: [profile.name, "Full Stack Developer"],
     sub: "Nearly 3 years building ERP and corporate systems in production. I also build websites and landing pages from scratch.",
     ctaPrimary: "Let's talk",
     ctaSecondary: "See the work",

@@ -36,7 +36,7 @@ export default function Education() {
       </dl>
 
       <Reveal delay={0.3}>
-        <div className="mt-14 flex flex-wrap items-center gap-x-8 gap-y-3 border-t border-biolum/12 pt-8">
+        <div className="mt-14 flex flex-col items-start gap-3 border-t border-biolum/12 pt-8 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-8 sm:gap-y-3">
           <h3 className="inline-flex items-center gap-2 font-display text-sm text-biolum">
             <Translate size={17} weight="light" aria-hidden />
             {t.education.languagesTitle}

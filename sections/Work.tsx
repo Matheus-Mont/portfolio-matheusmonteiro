@@ -100,7 +100,7 @@ export default function Work() {
             {t.work.title}
           </h2>
         </Reveal>
-        <div className="flex gap-2">
+        <div className="flex gap-2 lg:hidden">
           <button type="button" onClick={() => slide(-1)} disabled={atStart} aria-label={t.work.prev} className={arrow}>
             <CaretLeft size={18} aria-hidden />
           </button>
@@ -115,21 +115,21 @@ export default function Work() {
         tabIndex={0}
         role="region"
         aria-label={t.work.hint}
-        className="mt-10 flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-pl-8 scroll-pr-8 pb-4 sm:scroll-pl-5 sm:scroll-pr-5 [scrollbar-width:none] lg:mt-14 lg:cursor-grab lg:active:cursor-grabbing [&::-webkit-scrollbar]:hidden"
+        className="mt-10 flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-pl-8 scroll-pr-8 pb-4 sm:scroll-pl-5 sm:scroll-pr-5 [scrollbar-width:none] lg:mt-14 lg:grid lg:grid-cols-3 lg:gap-6 lg:overflow-visible lg:px-5 lg:pb-0 [&::-webkit-scrollbar]:hidden"
       >
         {projects.map((project) => {
           const item = t.work.items[project.id];
           return (
             <article
               key={project.id}
-              className="flex w-[76vw] shrink-0 snap-start flex-col overflow-hidden rounded-[14px] border border-biolum/18 bg-abyss-3/80 first:ml-8 last:mr-8 sm:w-[62vw] sm:first:ml-5 sm:last:mr-5 lg:w-[40vw] xl:w-[33vw]"
+              className="flex w-[76vw] shrink-0 snap-start flex-col overflow-hidden rounded-[14px] border border-biolum/18 bg-abyss-3/80 first:ml-8 last:mr-8 sm:w-[62vw] sm:first:ml-5 sm:last:mr-5 lg:w-auto lg:shrink lg:first:ml-0 lg:last:mr-0"
             >
               <div className="relative aspect-[16/9] w-full shrink-0 overflow-hidden bg-abyss sm:aspect-[16/10]">
                 <Image
                   src={project.shot}
                   alt={`${item.name}: ${t.work.shotAlt}`}
                   fill
-                  sizes="(min-width: 1280px) 33vw, (min-width: 1024px) 40vw, (min-width: 640px) 62vw, 85vw"
+                  sizes="(min-width: 1024px) 30vw, (min-width: 640px) 62vw, 76vw"
                   className="object-cover object-top"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-abyss-3/70 via-transparent to-transparent" />
